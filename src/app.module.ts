@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { OpenAIModule } from './openai/openai.module';
 import { ConfigModule } from '@nestjs/config';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     OpenAIModule.forRoot({
       apiKey: process.env.OPENAI_API_KEY,
     }),
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
