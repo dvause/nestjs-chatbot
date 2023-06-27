@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Configuration, OpenAIApi } from 'openai';
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from 'openai';
 import { OpenAIConfig } from './openai.interfaces';
 
 @Injectable()
@@ -11,10 +11,10 @@ export class OpenAIService {
     this.apiClient = new OpenAIApi(configuration);
   }
 
-  async chat() {
+  async chat(messages: ChatCompletionRequestMessage[]) {
     const chatCompletion = await this.apiClient.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: 'Hello world' }],
+      messages: messages,
     });
     return chatCompletion.data.choices[0].message;
   }
