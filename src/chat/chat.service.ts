@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { OpenAIService } from '../openai/openai.service';
 import {
   ChatCompletionRequestMessage,
@@ -10,7 +10,9 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ChatService {
+  private readonly logger = new Logger(ChatService.name);
   private messages: ChatCompletionRequestMessage[] = [];
+
   constructor(
     private readonly configService: ConfigService,
     private readonly openAIService: OpenAIService,
@@ -19,10 +21,11 @@ export class ChatService {
   async chat(
     chatMessageDto: ChatMessageDto,
   ): Promise<ChatCompletionResponseMessage> {
-    // If this is the first message, add a system message.
+    // If this is the first message, add the system prompt.
     if (this.messages.length === 0) {
-      const systemPrompt = this.configService.get<string>('SYSTEM_PROMPT');
-      console.log('systemPrompt', systemPrompt);
+      const systemPrompt =
+        this.configService.get<string>('SYSTEM_PROMPT') ||
+        'You are a helpful assistant.';
 
       const systemMessage: ChatCompletionRequestMessage = {
         role: ChatCompletionRequestMessageRoleEnum.System,
@@ -37,7 +40,7 @@ export class ChatService {
     this.messages.push(userMessage);
     const response = await this.openAIService.chatCompletion(this.messages);
     this.messages.push(response);
-    console.log('messages', this.messages);
+    this.logger.log('messages', this.messages);
     return response;
   }
 }

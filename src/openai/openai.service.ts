@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, Logger } from '@nestjs/common';
 import {
   ChatCompletionRequestMessage,
   ChatCompletionResponseMessage,
@@ -9,6 +9,7 @@ import { OpenAIConfig } from './openai.interfaces';
 
 @Injectable()
 export class OpenAIService {
+  private readonly logger = new Logger(OpenAIService.name);
   private apiClient: OpenAIApi;
 
   constructor(@Inject('OPENAI_CONFIG') private readonly config: OpenAIConfig) {
@@ -28,10 +29,10 @@ export class OpenAIService {
       return chatCompletion.data.choices[0].message;
     } catch (error) {
       if (error.response?.status) {
-        console.log(error.response.status);
-        console.log(error.response.data);
+        this.logger.error(error.response.status);
+        this.logger.error(error.response.data);
       } else {
-        console.log(error.message);
+        this.logger.error(error.message);
       }
     }
   }
@@ -47,10 +48,10 @@ export class OpenAIService {
       return completion.data.choices[0].text;
     } catch (error) {
       if (error.response?.status) {
-        console.log(error.response.status);
-        console.log(error.response.data);
+        this.logger.error(error.response.status);
+        this.logger.error(error.response.data);
       } else {
-        console.log(error.message);
+        this.logger.error(error.message);
       }
     }
   }
