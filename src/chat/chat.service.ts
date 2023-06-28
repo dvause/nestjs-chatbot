@@ -35,7 +35,7 @@ export class ChatService {
       content: chatMessageDto.message,
     };
     this.messages.push(userMessage);
-    const response = await this.openAIService.chat(this.messages);
+    const response = await this.openAIService.chatCompletion(this.messages);
     this.messages.push(response);
     console.log('messages', this.messages);
     return response;

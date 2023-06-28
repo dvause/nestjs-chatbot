@@ -46,7 +46,13 @@ describe('OpenAIService', () => {
     messages.push(systemMessage);
     messages.push(userMessage);
 
-    const response = await service.chat(messages);
+    const response = await service.chatCompletion(messages);
+    expect(response).toBeDefined();
+  });
+
+  it('should return a completion response', async () => {
+    const prompt = 'Once upon a time';
+    const response = await service.completion(prompt);
     expect(response).toBeDefined();
   });
 });
