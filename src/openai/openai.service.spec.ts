@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OpenAIService } from './openai.service';
 import * as dotenv from 'dotenv';
 import { OpenAIModule } from './openai.module';
-import * as process from 'process';
 import { OpenAIConfig } from './openai.interfaces';
 import { ChatCompletionRequestMessage } from 'openai';
 
@@ -16,6 +15,7 @@ describe('OpenAIService', () => {
   beforeEach(async () => {
     const mockConfig: OpenAIConfig = {
       apiKey: process.env.OPENAI_API_KEY,
+      systemMessage: process.env.SYSTEM_MESSAGE,
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -47,7 +47,6 @@ describe('OpenAIService', () => {
     messages.push(userMessage);
 
     const response = await service.chat(messages);
-    console.log(response);
     expect(response).toBeDefined();
   });
 });

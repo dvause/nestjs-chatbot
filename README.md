@@ -9,6 +9,12 @@ An [OpenAI](https://openai.com) chatbot written in the [Nest](https://github.com
 $ npm install
 ```
 
+## Configuration
+```dotenv
+OPENAI_API_KEY='[your OpenAI API key]'
+SYSTEM_PROMPT='You are a helpful chatbot that speaks in a Medeval dialect.'
+```
+
 ## Running the app
 
 ```bash

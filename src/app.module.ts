@@ -9,9 +9,11 @@ import { ChatModule } from './chat/chat.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      cache: true,
     }),
     OpenAIModule.forRoot({
       apiKey: process.env.OPENAI_API_KEY,
+      systemMessage: process.env.SYSTEM_MESSAGE,
     }),
     ChatModule,
   ],

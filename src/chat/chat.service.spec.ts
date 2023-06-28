@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ChatService } from './chat.service';
 import { OpenAIService } from '../openai/openai.service';
+import { ConfigService } from '@nestjs/config';
 
 describe('ChatService', () => {
   let service: ChatService;
@@ -10,6 +11,7 @@ describe('ChatService', () => {
       providers: [
         ChatService,
         { provide: OpenAIService, useValue: OpenAIService },
+        { provide: ConfigService, useValue: ConfigService },
       ],
     }).compile();
 
