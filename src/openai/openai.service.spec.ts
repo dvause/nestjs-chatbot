@@ -3,7 +3,7 @@ import { OpenAIService } from './openai.service';
 import * as dotenv from 'dotenv';
 import { OpenAIModule } from './openai.module';
 import { OpenAIConfig } from './openai.interfaces';
-import { ChatCompletionRequestMessage } from 'openai';
+import * as process from 'process';
 
 describe('OpenAIService', () => {
   let service: OpenAIService;
@@ -16,6 +16,8 @@ describe('OpenAIService', () => {
     const mockConfig: OpenAIConfig = {
       apiKey: process.env.OPENAI_API_KEY,
       systemMessage: process.env.SYSTEM_MESSAGE,
+      temperature: 0.7,
+      modelName: 'gpt-3.5-turbo',
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -34,25 +36,7 @@ describe('OpenAIService', () => {
   });
 
   it('should return a chat response', async () => {
-    const messages: ChatCompletionRequestMessage[] = [];
-    const systemMessage: ChatCompletionRequestMessage = {
-      role: 'system',
-      content: 'Hello, I am a chatbot. I am here to help you.',
-    };
-    const userMessage: ChatCompletionRequestMessage = {
-      role: 'user',
-      content: 'Hello, World!',
-    };
-    messages.push(systemMessage);
-    messages.push(userMessage);
-
-    const response = await service.chatCompletion(messages);
-    expect(response).toBeDefined();
-  });
-
-  it('should return a completion response', async () => {
-    const prompt = 'Once upon a time';
-    const response = await service.completion(prompt);
+    const response = await service.chatCompletion('Hello, World!');
     expect(response).toBeDefined();
   });
 });
