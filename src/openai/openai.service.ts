@@ -56,23 +56,4 @@ export class OpenAIService {
       }
     }
   }
-
-  // async completion(prompt: string): Promise<string> {
-  //   try {
-  //     const completion = await this.apiClient.createCompletion({
-  //       model: 'text-davinci-003',
-  //       prompt: prompt,
-  //       temperature: 0.7,
-  //     });
-  //     // console.log(completion.data);
-  //     return completion.data.choices[0].text;
-  //   } catch (error) {
-  //     if (error.response?.status) {
-  //       this.logger.error(error.response.status);
-  //       this.logger.error(error.response.data);
-  //     } else {
-  //       this.logger.error(error.message);
-  //     }
-  //   }
-  // }
 }
