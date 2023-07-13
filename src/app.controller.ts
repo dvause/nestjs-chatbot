@@ -9,10 +9,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get('env')
-  printEnv(): string {
-    const envVars = process.env;
-    return JSON.stringify(envVars, null, 2);
-  }
 }

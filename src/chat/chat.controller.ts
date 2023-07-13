@@ -1,6 +1,5 @@
 import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { ChatService } from './chat.service';
-import { ChatCompletionResponseMessage } from 'openai';
 import { ChatMessageDto } from './dto/chat-message.dto';
 
 @Controller('chat')
@@ -9,9 +8,8 @@ export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
   @Post()
-  async chat(
-    @Body() chatMessageDto: ChatMessageDto,
-  ): Promise<ChatCompletionResponseMessage> {
+  async chat(@Body() chatMessageDto: ChatMessageDto) {
+    this.logger.log('chatMessageDto', chatMessageDto);
     return await this.chatService.chat(chatMessageDto);
   }
 }

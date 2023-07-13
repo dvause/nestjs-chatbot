@@ -2,7 +2,7 @@
   "name": "nestjs-chatbot",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Dave Vause",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -24,6 +24,7 @@
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "langchain": "^0.0.108",
     "openai": "^3.3.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
