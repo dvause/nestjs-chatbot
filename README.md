@@ -1,7 +1,7 @@
 
 ## Description
 
-An [OpenAI](https://openai.com) chatbot starter written in the [Nest](https://github.com/nestjs/nest) framework.
+An [OpenAI](https://openai.com) chatbot starter written with [Langchain](https://js.langchain.com/docs/) and the [Nest](https://github.com/nestjs/nest) framework.
 
 ## Installation
 
